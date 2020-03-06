@@ -8,9 +8,24 @@ var totalQuestion =document.querySelector(".total-question");
 var options = document.querySelector(".options").children;
 var ansTracker = document.querySelector(".answers-tracker");
 var qusIndex;
+var timeStart = document.querySelector("#start");
 
 var index =0;
+var secondsLeft =5;
 
+function setTime() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timeStart.textContent = secondsLeft + " seconds left to finish the coding quiz";
+  
+      if(secondsLeft === 0) {
+        clearInterval(timerInterval);
+        sendMessage();
+      }
+  
+    }, 1000);
+  }
+  setTime();
 var questions = [
     {
      q:" Which function of an Array object calls a function for each element in the array?",
