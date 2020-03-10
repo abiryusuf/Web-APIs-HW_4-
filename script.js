@@ -1,3 +1,4 @@
+//Get element 
 var beginButton = document.querySelector("#begin");
 var timer = document.querySelector("#timer");
 //Count in second
@@ -7,9 +8,11 @@ var highscoreButton = document.querySelector('#view-highscores');
 var question = 0;
 var score = 0;
 
+var quizCard;
+
 var highscoreInitials = [];
 var highscores = [];
-
+//Question and Answer
 var questions = [
 	{
 		question: "Which function of an Array object calls a function for each element in the array?",
@@ -43,7 +46,7 @@ var questions = [
 	{
 		question: " Which of the following is an advantage of using JavaScript?",
 		answers: [
-			"a. Increased interacivity","b. Less server interaction", "c. Immediate feedback from the user", "d. All the above"
+			"a. Increased interacivity","b. Less server interaction", "c. Immediate feedback", "d. All the above"
 		],
 		correctAnswer: 3
 	}
@@ -54,7 +57,7 @@ var questions = [
 
 function showQuestion (questionNumber) {
 
-	var quizCard = document.createElement("div");
+	quizCard = document.createElement("div");
 	quizCard.className ="card";
 
 	quizContainer.appendChild(quizCard);
@@ -86,17 +89,17 @@ function showQuestion (questionNumber) {
 
 	//build a function to increment the value 
 	cardBody.addEventListener('click', (event) => {
-		const isButton = event.target.nodeName === 'BUTTON';
+		var isButton = event.target.nodeName === 'BUTTON';
 		if (isButton) {
 			answerSelected = parseInt(event.target.getAttribute("data-answer-index"));
 			if (answerSelected === questions[question].correctAnswer) {
 				score += 1;
 				answerConfirm.textContent="Correct!";
-				answerConfirm.setAttribute("style", "color: green; font-size: 20px")
+				answerConfirm.setAttribute("style", "color: white; background-color: green; font-size: 20px")
 			}
 			else {
 				answerConfirm.textContent="Wrong!";
-				answerConfirm.setAttribute("style", "color: red; font-size: 20px")
+				answerConfirm.setAttribute("style", "color: white; background-color: red; font-size: 20px")
 				time -= 5;
 			}
 			setTimeout(function(){
@@ -132,7 +135,7 @@ function quizComplete() {
 	cardHeader = document.createElement("div");
 	cardHeader.className = "card-header";
 
-	cardHeader.textContent = "Quiz Completed";
+	cardHeader.textContent = "All done!";
 
 	quizCard.appendChild(cardHeader);
 
@@ -252,7 +255,7 @@ function showHighscores() {
 	quizContainer.appendChild(tbody);
 
 	var clearButton = document.createElement("button");
-	clearButton.className = "btn btn-primary answerBtn";
+	clearButton.className = "btn btn-dark answerBtn";
 	clearButton.textContent = "Clear";
 	quizContainer.appendChild(clearButton);
 
